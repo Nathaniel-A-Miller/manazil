@@ -6,6 +6,7 @@
   const BASE = "https://duhsapgvvlpzrhtvnciu.supabase.co";
   const KEY = "sb_publishable_N19t8v31QEDJ_qIRKEjRig_rSDS5QoI";   // public by design; RLS does the protecting
   const SESSION = "manazil-session";
+  const HELP_SEEN = "manazil-help-seen";
   const PAGE = document.body.dataset.editPage;                    // "*" on pages that show text from every chapter
 
   const targets = new Map();    // loc -> elements showing it
@@ -235,7 +236,7 @@
             storeSession(res.data);
             renderAccount();
             d.close();
-            toast("Signed in. Click any line of text to edit it.");
+            showHelpOnce();
           } catch (err) {
             error.textContent = "Couldn't reach the server. Please try again.";
           } finally {
@@ -249,6 +250,25 @@
       el("div", { className: "edit-actions" },
         el("button", { type: "button", className: "link-button", textContent: "Cancel", onclick: () => d.close() }),
         submit)));
+  }
+
+  function openHelp() {
+    const d = dialog("How to edit",
+      el("ul", { className: "edit-help" },
+        el("li", { textContent: "Click any line of text, English or Arabic, to open it. Lines highlight as you point at them." }),
+        el("li", { textContent: "Save publishes your change right away, for everyone, under your name." }),
+        el("li", { textContent: "Earlier versions, under the box, brings back any previous wording, including the original." }),
+        el("li", { textContent: "Comments are for what the box can't fix, such as a poet, a meter, or a verse to split or remove." }),
+        el("li", null, "Not sure where to begin? ",
+          el("a", { href: "review.html", textContent: "Uncertain passages" }), " lists where the translator wasn't sure.")),
+      el("div", { className: "edit-actions" },
+        el("button", { type: "button", className: "primary", textContent: "Got it", autofocus: true, onclick: () => d.close() })));
+  }
+
+  function showHelpOnce() {
+    if (localStorage.getItem(HELP_SEEN)) return;
+    localStorage.setItem(HELP_SEEN, "1");
+    openHelp();
   }
 
   function openAccount() {
@@ -279,6 +299,7 @@
       el("label", { htmlFor: "edit-new-password", textContent: "New password" }), password,
       error,
       el("div", { className: "edit-actions" },
+        el("button", { type: "button", className: "link-button", textContent: "How to edit", onclick: () => { d.close(); openHelp(); } }),
         el("button", { type: "button", className: "link-button", textContent: "Sign out", onclick: () => { signOut(); d.close(); } }),
         el("button", { type: "button", className: "link-button", textContent: "Close", onclick: () => d.close() }),
         el("button", { type: "submit", className: "primary", textContent: "Change password" }))));
@@ -459,5 +480,8 @@
   });
 
   renderAccount();
-  loadAll().catch((err) => console.warn("Edits not loaded:", err)).finally(renderAccount);
+  loadAll().catch((err) => console.warn("Edits not loaded:", err)).finally(() => {
+    renderAccount();
+    if (session()) showHelpOnce();   // for anyone already signed in when this was added
+  });
 })();

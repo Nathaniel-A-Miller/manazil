@@ -218,6 +218,8 @@ body.editing .has-comment { border-bottom: 2px dotted var(--accent); }
 .edit-history li, .edit-comments li { padding: .45rem 0; border-bottom: 1px solid var(--rule); }
 .edit-history-who { color: var(--muted); font-size: .85rem; }
 .edit-history-text { display: block; }
+.edit-help { margin: 0; padding-left: 1.2rem; }
+.edit-help li { margin-bottom: .5rem; }
 .edit-toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%); z-index: 3; max-width: calc(100vw - 2rem);
   padding: .5rem 1rem; background: var(--ink); color: var(--paper); font-size: .95rem; }
 
@@ -317,7 +319,8 @@ def poem_html(p):
         meta_ar.append("من " + e(p["meter"]))
     meta_en = []
     if p.get("id") is not None:
-        meta_en.append(f'Index {p["id"]}' + (f', page {p["print_page"]}' if p.get("print_page") else ""))
+        shown_page = p.get("print_page") and not p.get("print_page_suspect")   # a suspect page is an OCR misread
+        meta_en.append(f'Index {p["id"]}' + (f', page {p["print_page"]}' if shown_page else ""))
     if p.get("status") == "partial":
         meta_en.append("partial quotation")
     parts.append(f'<div class="row meta"><div><a href="#{anchor}">{"; ".join(meta_en) or "Poem"}</a></div>'

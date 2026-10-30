@@ -145,6 +145,8 @@ body.editing .has-comment { border-bottom: 2px dotted var(--accent); }
 .edit-history li, .edit-comments li { padding: .45rem 0; border-bottom: 1px solid var(--rule); }
 .edit-history-who { color: var(--muted); font-size: .85rem; }
 .edit-history-text { display: block; }
+.edit-help { margin: 0; padding-left: 1.2rem; }
+.edit-help li { margin-bottom: .5rem; }
 .edit-toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%); z-index: 3; max-width: calc(100vw - 2rem);
   padding: .5rem 1rem; background: var(--ink); color: var(--paper); font-size: .95rem; }
 
