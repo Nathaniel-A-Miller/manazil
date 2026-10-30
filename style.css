@@ -1,0 +1,109 @@
+
+:root {
+  --paper: #edf0ec;
+  --ink: #1d2a2e;
+  --muted: #5f6e6b;
+  --rule: #c6cec9;
+  --accent: #2e6b62;
+  --gloss: #e2e7e3;
+  --en: "Gentium Book Plus", "Gentium Plus", Georgia, serif;
+  --ar: "Amiri", "Traditional Arabic", "Times New Roman", serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); color: var(--ink); }
+body { margin: 0; font-family: var(--en); font-size: 1.0625rem; line-height: 1.6; }
+a { color: var(--accent); text-underline-offset: .18em; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+[lang="ar"] { font-family: var(--ar); font-size: 1.3rem; line-height: 1.9; }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 2; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.bar-inner { max-width: 72rem; margin: 0 auto; padding: .55rem 1.25rem; display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem; }
+.bar .home { font-family: var(--ar); font-size: 1.35rem; text-decoration: none; color: var(--ink); }
+.bar details { position: relative; }
+.bar summary { cursor: pointer; list-style: none; color: var(--accent); }
+.bar summary::-webkit-details-marker { display: none; }
+.bar details[open] summary { text-decoration: underline; }
+.menu { position: absolute; right: 0; top: 2rem; width: min(30rem, 90vw); max-height: 75vh; overflow: auto;
+  background: var(--paper); border: 1px solid var(--rule); padding: .5rem 0; box-shadow: 0 8px 24px rgba(29,42,46,.12); }
+.menu a { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: .35rem 1rem; text-decoration: none; color: var(--ink); }
+.menu a:hover, .menu a[aria-current] { background: var(--gloss); }
+.menu .ar { font-family: var(--ar); font-size: 1.1rem; }
+
+main { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem 5rem; }
+
+/* Home */
+.hero { padding: 4.5rem 0 3rem; display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 2rem;
+  border-bottom: 1px solid var(--rule); }
+.hero h1 { grid-column: 2; grid-row: 1; margin: 0; font-family: var(--ar); font-weight: 700;
+  font-size: clamp(4rem, 11vw, 8.5rem); line-height: 1.1; text-align: right; }
+.hero .en { grid-column: 1; grid-row: 1; padding-bottom: 1.4rem; }
+.hero .en p { margin: 0; }
+.hero .title-en { font-size: 1.9rem; font-style: italic; line-height: 1.25; }
+.hero .author { color: var(--muted); margin-top: .5rem !important; }
+.epigraph { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--rule); }
+.epigraph .en { font-style: italic; color: var(--muted); align-self: center; }
+.about { max-width: 38rem; color: var(--muted); padding: 1.5rem 0 0; }
+.contents { list-style: none; margin: 2.5rem 0 0; padding: 0; }
+.contents li a { display: grid; grid-template-columns: 2.5rem 1fr 1fr; gap: 1rem; align-items: baseline;
+  padding: .7rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); }
+.contents li a:hover .t-en { text-decoration: underline; color: var(--accent); }
+.contents .num { color: var(--muted); font-variant-numeric: oldstyle-nums; }
+.contents .t-ar { font-family: var(--ar); font-size: 1.3rem; text-align: right; }
+.contents .count { display: block; color: var(--muted); font-size: .9rem; }
+
+/* Chapter */
+.chapter-head { padding: 3.5rem 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end;
+  border-bottom: 1px solid var(--rule); }
+.chapter-head h1 { margin: 0; font-weight: 400; font-size: 1.9rem; line-height: 1.25; font-style: italic; }
+.chapter-head .ar { font-family: var(--ar); font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.3; text-align: right; }
+.sub { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 3.5rem 0 0; }
+.sub h2 { margin: 0; font-family: var(--ar); font-weight: 400; font-size: 1.8rem; grid-column: 2; text-align: right; }
+
+.poem { padding: 2.25rem 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 4rem; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.row > * { min-width: 0; }
+.prose { margin: 0 0 1.1rem; }
+.prose p { margin: 0; }
+.prose [lang="ar"] { text-align: justify; }
+.meta { color: var(--muted); font-size: .9rem; margin-bottom: .6rem; }
+.meta [lang="ar"] { font-size: 1.1rem; text-align: right; }
+.meta a { color: var(--muted); }
+
+.verses { margin: .4rem 0 1rem; }
+.verse { padding: .15rem 0; }
+.verse .en span { display: block; padding-left: 1.6rem; text-indent: -1.6rem; }
+.verse .en .h2 { padding-left: 3.2rem; }
+/* An Arabic bayt: the two hemistichs side by side, the second towards the left. */
+.verse [lang="ar"] { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1.5rem; }
+.verse [lang="ar"] .h2 { text-align: left; }
+.verse [lang="ar"] .h1:only-child { grid-column: 1 / -1; text-align: center; }
+
+.gloss { background: var(--gloss); padding: .5rem .8rem; margin: .5rem 0 .7rem; font-size: .95rem; }
+.gloss [lang="ar"] { font-size: 1.15rem; }
+
+details.notes { margin-top: .8rem; font-size: .92rem; color: var(--muted); }
+details.notes summary { cursor: pointer; color: var(--accent); width: fit-content; }
+details.notes ul { margin: .5rem 0 0; padding-left: 1.2rem; max-width: 40rem; }
+
+.pager { display: flex; justify-content: space-between; gap: 1rem; padding: 2.5rem 0 0; }
+.pager a { text-decoration: none; }
+.pager .ar { font-family: var(--ar); font-size: 1.15rem; }
+.missing { color: var(--muted); font-style: italic; }
+
+@media (max-width: 760px) {
+  .hero, .epigraph, .chapter-head, .row, .sub { grid-template-columns: 1fr; gap: .4rem; }
+  .hero h1, .hero .en, .sub h2 { grid-column: 1; grid-row: auto; }
+  .hero { padding-top: 2.5rem; }
+  /* Arabic first, then English, on narrow screens. */
+  .row > [lang="ar"], .epigraph > [lang="ar"], .chapter-head > .ar { order: -1; }
+  .verse { padding: .4rem 0; }
+  .contents li a { grid-template-columns: 2rem 1fr; }
+  .contents .t-ar { grid-column: 2; text-align: right; }
+}
+@media (max-width: 480px) {
+  /* Too narrow for hemistichs side by side: stack them, the second indented. */
+  .verse [lang="ar"] { grid-template-columns: 1fr; }
+  .verse [lang="ar"] .h2 { text-align: right; padding-right: 1.6rem; }
+}
