@@ -101,6 +101,53 @@ details.notes ul { margin: .5rem 0 0; padding-left: 1.2rem; max-width: 40rem; }
 .pager .ar { font-family: var(--ar); font-size: 1.15rem; }
 .missing { color: var(--muted); font-style: italic; }
 
+/* Review page */
+.review-intro { max-width: 40rem; padding-top: 1.5rem; }
+.review-intro p { margin: 0 0 .8rem; }
+.review-jump { list-style: none; margin: 1.2rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.review-jump a { display: flex; justify-content: space-between; gap: 1rem; padding: .4rem 0;
+  border-bottom: 1px solid var(--rule); text-decoration: none; }
+.review-jump .count { color: var(--muted); font-variant-numeric: oldstyle-nums; white-space: nowrap; }
+.review-group { margin-top: 3.5rem; scroll-margin-top: 4rem; }
+.review-group > h2 { margin: 0; font-weight: 400; font-style: italic; font-size: 1.6rem; }
+.review-group > p { margin: .3rem 0 0; color: var(--muted); max-width: 40rem; }
+.flag { padding: 1.4rem 0; border-bottom: 1px solid var(--rule); }
+.flag-where { display: block; margin-bottom: .4rem; color: var(--muted); font-size: .9rem; }
+.flag-note { margin: .5rem 0 0; font-size: .95rem; max-width: 40rem; }
+
+/* Editing */
+.bar-tools { display: flex; align-items: center; gap: 1.25rem; }
+.link-button { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer;
+  text-decoration: underline; text-underline-offset: .18em; }
+.verse { scroll-margin-top: 4rem; }
+body.editing [data-loc] { cursor: text; }
+body.editing [data-loc]:hover { background: var(--gloss); }
+body.editing [data-loc]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+body.editing .has-comment { border-bottom: 2px dotted var(--accent); }
+.stale::after { content: " Arabic changed"; color: var(--accent); font-size: .78rem; font-style: italic; white-space: nowrap; }
+.edit-dialog { width: min(40rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); overflow: auto;
+  background: var(--paper); color: var(--ink); border: 1px solid var(--rule); padding: 1.25rem; }
+.edit-dialog::backdrop { background: rgba(29,42,46,.4); }
+.edit-dialog h2 { margin: 0 0 .8rem; font-weight: 400; font-style: italic; font-size: 1.25rem; }
+.edit-dialog label { display: block; margin: .6rem 0 .2rem; color: var(--muted); font-size: .9rem; }
+.edit-dialog textarea, .edit-dialog input { width: 100%; padding: .5rem .6rem; color: var(--ink); background: #fff;
+  border: 1px solid var(--rule); font-family: var(--en); font-size: 1rem; line-height: 1.5; }
+.edit-dialog textarea[lang="ar"] { font-family: var(--ar); font-size: 1.3rem; line-height: 1.8; }
+.edit-actions { display: flex; justify-content: flex-end; align-items: center; gap: 1rem; margin-top: .7rem; }
+.primary { background: var(--accent); color: #fff; border: 0; padding: .4rem 1rem; font: inherit; cursor: pointer; }
+.primary:disabled { opacity: .6; cursor: default; }
+.edit-error { margin: .5rem 0 0; color: #9a2f22; font-size: .92rem; }
+.edit-error:empty { display: none; }
+.edit-also { margin: .9rem 0 0; font-size: .92rem; color: var(--muted); }
+.edit-section { margin-top: .9rem; border-top: 1px solid var(--rule); padding-top: .6rem; font-size: .95rem; }
+.edit-section summary { cursor: pointer; color: var(--accent); width: fit-content; }
+.edit-history, .edit-comments { list-style: none; margin: .5rem 0; padding: 0; }
+.edit-history li, .edit-comments li { padding: .45rem 0; border-bottom: 1px solid var(--rule); }
+.edit-history-who { color: var(--muted); font-size: .85rem; }
+.edit-history-text { display: block; }
+.edit-toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%); z-index: 3; max-width: calc(100vw - 2rem);
+  padding: .5rem 1rem; background: var(--ink); color: var(--paper); font-size: .95rem; }
+
 @media (max-width: 760px) {
   .hero, .epigraph, .chapter-head, .row, .sub { grid-template-columns: 1fr; gap: .4rem; }
   .hero h1, .hero .en, .sub h2 { grid-column: 1; grid-row: auto; }
