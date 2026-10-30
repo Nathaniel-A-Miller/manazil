@@ -110,6 +110,8 @@ details.notes ul { margin: .5rem 0 0; padding-left: 1.2rem; max-width: 40rem; }
   .verse { padding: .4rem 0; }
   .contents li a { grid-template-columns: 2rem 1fr; }
   .contents .t-ar { grid-column: 2; text-align: right; }
+  /* Stacked rows: the Arabic line already carries the chapter number. */
+  .toc .en .n { display: none; }
 }
 @media (max-width: 480px) {
   /* Too narrow for hemistichs side by side: stack them, the second indented. */
