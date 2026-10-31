@@ -450,7 +450,7 @@ def main():
     poems = [p for p in data["poems"] if "embedded_in" not in p]   # embedded ones repeat their host's verses
     muq_poems = {p["source_lines"][0]: p for p in poems if p["chapter"] == "المقدمة"}
 
-    chapters = [{"file": "muqaddima.html", "ar": "المقدمة", "en": "Author's preface", "num": None, "poems": []}]
+    chapters = [{"file": "muqaddima.html", "ar": "المقدمة", "en": "Author’s preface", "num": None, "poems": []}]
     for p in poems:
         if p["chapter"] == "المقدمة":
             continue
@@ -459,7 +459,7 @@ def main():
             chapters.append({"file": f"chapter-{n:02d}.html", "ar": strip_number(p["chapter"]),
                              "en": CHAPTER_EN.get(n, p["chapter"]), "num": n, "poems": []})
         chapters[-1]["poems"].append(p)
-    chapters.append({"file": "colophon.html", "ar": "خاتمة الناسخ", "en": "Copyist's colophon", "num": None, "poems": []})
+    chapters.append({"file": "colophon.html", "ar": "خاتمة الناسخ", "en": "Copyist’s colophon", "num": None, "poems": []})
 
     places = {}
     for file, group in [("muqaddima.html", muq_poems.values())] + [(ch["file"], ch["poems"]) for ch in chapters]:
@@ -501,7 +501,7 @@ def main():
 
     chapters[0]["poems"] = list(muq_poems.values())    # for the review page only; the muqaddima renders its own
     (SITE / "review.html").write_text(
-        page("Uncertain passages: al-Manazil wa-l-Diyar", review_html(chapters), nav_bar(chapters, "review.html")),
+        page("Uncertain passages: al-Manāzil wa-l-Diyār", review_html(chapters), nav_bar(chapters, "review.html")),
         encoding="utf-8")
     chapters[0]["poems"] = []
 
@@ -518,13 +518,13 @@ def main():
     home = (
         '<section class="hero"><h1 lang="ar" dir="rtl">المنازل والديار</h1>'
         '<div class="en"><p class="title-en">Abodes and Dwellings</p>'
-        '<p class="author">Usama ibn Munqidh (d. 584/1188)</p></div></section>'
+        '<p class="author">Usāma ibn Munqidh (d. 584/1188)</p></div></section>'
         f'<section class="epigraph" data-page="{chapters[1]["file"]}">'
         f'<p class="en"><span data-loc="{loc}.h1.en">{e(tv.get("h1", ""))}</span><br>'
         f'<span data-loc="{loc}.h2.en">{e(tv.get("h2", ""))}</span></p>'
         f'<p lang="ar" dir="rtl"><span data-loc="{loc}.h1.ar">{e(v["h1"])}</span><br>'
         f'<span data-loc="{loc}.h2.ar">{e(v["h2"])}</span></p></section>'
-        f'<p class="about">Arabic text from the <a href="{SOURCE_URL}">Shamela edition by Mustafa Hijazi, via OpenITI</a>, '
+        f'<p class="about">Arabic text from the <a href="{SOURCE_URL}">Shamela text, based on the edition of Muṣtafā Ḥijāzī, via OpenITI</a>, '
         'with a draft machine '
         'translation: the verse by GPT-6 Astra, the prose by GPT-6.1 Sol. Scholars are correcting both the '
         'Arabic and the English, and their changes appear here as they are made. '
