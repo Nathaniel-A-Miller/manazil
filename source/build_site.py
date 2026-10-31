@@ -23,7 +23,7 @@ SITE = ROOT.parent
 SOURCE_URL = ("https://github.com/OpenITI/RELEASE/blob/master/data/0584IbnMunqidhShayzari/"
               "0584IbnMunqidhShayzari.ManazilWaDiyar/0584IbnMunqidhShayzari.ManazilWaDiyar.Shamela0005416-ara1.completed")
 CREDIT = "Website by Dr. Nathaniel A. Miller"
-DESCRIPTION = ("Usama ibn Munqidh's al-Manazil wa-l-Diyar (Encampments and Dwellings): "
+DESCRIPTION = ("Usama ibn Munqidh’s al-Manazil wa-l-Diyar (Encampments and Dwellings): "
                "the Arabic text facing a draft English translation.")
 
 # English titles for the chapter headings.
@@ -369,7 +369,7 @@ def poem_html(p):
         items = "".join(f'<li>{"Line " + str(x["line"]) + ": " if x.get("line") else ""}'
                         f'<span data-loc="{anchor}.n{k}">{e(x["note"])}</span></li>'
                         for k, x in enumerate(notes))
-        parts.append(f'<details class="notes"><summary>Translator\'s notes ({len(notes)})</summary>'
+        parts.append(f'<details class="notes"><summary>Translator’s notes ({len(notes)})</summary>'
                      f'<ul>{items}</ul></details>')
     parts.append("</article>")
     return "".join(parts)

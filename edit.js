@@ -230,7 +230,7 @@
           try {
             const res = await authPost("token?grant_type=password", { email: email.value.trim(), password: password.value });
             if (!res.ok) {
-              error.textContent = res.status === 400 ? "That email and password don't match." : "Sign-in failed. Please try again.";
+              error.textContent = res.status === 400 ? "That email and password don’t match." : "Sign-in failed. Please try again.";
               return;
             }
             storeSession(res.data);
@@ -238,7 +238,7 @@
             d.close();
             showHelpOnce();
           } catch (err) {
-            error.textContent = "Couldn't reach the server. Please try again.";
+            error.textContent = "Couldn’t reach the server. Please try again.";
           } finally {
             submit.disabled = false;
           }
@@ -258,9 +258,9 @@
         el("li", { textContent: "Click any line of text, English or Arabic, to open it. Lines highlight as you point at them." }),
         el("li", { textContent: "Save publishes your change right away, for everyone, under your name." }),
         el("li", { textContent: "Earlier versions, under the box, brings back any previous wording, including the original." }),
-        el("li", { textContent: "Comments are for what the box can't fix, such as a poet, a meter, or a verse to split or remove." }),
+        el("li", { textContent: "Comments are for what the box can’t fix, such as a poet, a meter, or a verse to split or remove." }),
         el("li", null, "Not sure where to begin? ",
-          el("a", { href: "review.html", textContent: "Uncertain passages" }), " lists where the translator wasn't sure.")),
+          el("a", { href: "review.html", textContent: "Uncertain passages" }), " lists where the translator wasn’t sure.")),
       el("div", { className: "edit-actions" },
         el("button", { type: "button", className: "primary", textContent: "Got it", autofocus: true, onclick: () => d.close() })));
   }
@@ -288,11 +288,11 @@
               body: JSON.stringify({ password: password.value }),
             });
             const body = await r.json().catch(() => ({}));
-            if (!r.ok) { error.textContent = body.msg || "Couldn't change the password."; return; }
+            if (!r.ok) { error.textContent = body.msg || "Couldn’t change the password."; return; }
             d.close();
             toast("Password changed.");
           } catch (err) {
-            error.textContent = "Couldn't reach the server. Please try again.";
+            error.textContent = "Couldn’t reach the server. Please try again.";
           }
         },
       },
@@ -322,7 +322,7 @@
     const lang = loc.endsWith(".ar") ? "Arabic" : "English";
     let m = loc.match(/\.v(\d+)\.h([12])\./);
     if (m) return `${lang}: line ${m[1]}, ${m[2] === "1" ? "first" : "second"} hemistich`;
-    if (/\.n\d+$/.test(loc)) return "Translator's note";
+    if (/\.n\d+$/.test(loc)) return "Translator’s note";
     if (/\.i\d+\./.test(loc)) return `${lang}: gloss`;
     return `${lang}: prose`;
   }
@@ -330,7 +330,7 @@
   function pageLabel(href) {
     const m = href.match(/^chapter-(\d+)/);
     if (m) return `Chapter ${Number(m[1])}`;
-    return href.startsWith("muqaddima") ? "Author's preface" : href;
+    return href.startsWith("muqaddima") ? "Author’s preface" : href;
   }
 
   async function openEditor(loc, node) {
@@ -354,7 +354,7 @@
       ...alsoHolder.dataset.also.split(" ").flatMap((href, i) => [
         i ? ", " : null,
         el("a", { href, target: "_blank", rel: "noopener", textContent: pageLabel(href) }),
-      ]).filter(Boolean), ". A change here won't reach those copies.");
+      ]).filter(Boolean), ". A change here won’t reach those copies.");
 
     const d = dialog(describe(loc), box, error,
       el("div", { className: "edit-actions" },
@@ -392,8 +392,8 @@
     renderSide();
 
     function failMessage(status) {
-      if (status === 401 || status === 403) return "You're not signed in as an editor. Your text is still in the box; sign in again in another tab, then save.";
-      return `Couldn't save (error ${status}). Your text is still in the box.`;
+      if (status === 401 || status === 403) return "You’re not signed in as an editor. Your text is still in the box; sign in again in another tab, then save.";
+      return `Couldn’t save (error ${status}). Your text is still in the box.`;
     }
 
     try {
@@ -402,13 +402,13 @@
       opened = box.value;
       renderSide();
     } catch (err) {
-      error.textContent = "Couldn't check for recent changes. You can still try to save.";
+      error.textContent = "Couldn’t check for recent changes. You can still try to save.";
     }
 
     save.onclick = async () => {
       const text = box.value;
       error.textContent = "";
-      if (!text.trim()) { error.textContent = "The text can't be empty."; return; }
+      if (!text.trim()) { error.textContent = "The text can’t be empty."; return; }
       if (text === current(loc)) { error.textContent = "Nothing has changed."; return; }
       const newest = latest(loc);
       // The first edit of a passage also records the built text as rev 1, so it stays restorable after a bake.
@@ -429,9 +429,9 @@
         await reloadLoc(loc);
         opened = box.value;
         d.close();
-        toast("Saved. It's live now.");
+        toast("Saved. It’s live now.");
       } catch (err) {
-        error.textContent = "Couldn't reach the server. Your text is still in the box.";
+        error.textContent = "Couldn’t reach the server. Your text is still in the box.";
       } finally {
         save.disabled = false;
       }
@@ -449,7 +449,7 @@
         await reloadLoc(loc);
         renderSide();
       } catch (err) {
-        error.textContent = "Couldn't reach the server. Your comment is still in the box.";
+        error.textContent = "Couldn’t reach the server. Your comment is still in the box.";
       } finally {
         commentButton.disabled = false;
       }
