@@ -20,6 +20,12 @@ ROOT = Path(__file__).parent
 DATA = ROOT / "translated_manazil.json"
 SITE = ROOT.parent
 
+SOURCE_URL = ("https://github.com/OpenITI/RELEASE/blob/master/data/0584IbnMunqidhShayzari/"
+              "0584IbnMunqidhShayzari.ManazilWaDiyar/0584IbnMunqidhShayzari.ManazilWaDiyar.Shamela0005416-ara1.completed")
+CREDIT = "Website by Dr. Nathaniel A. Miller"
+DESCRIPTION = ("Usama ibn Munqidh's al-Manazil wa-l-Diyar (Abodes and Dwellings): "
+               "the Arabic text facing a draft English translation.")
+
 # English titles for the chapter headings.
 CHAPTER_EN = {
     1: "On encampments (manāzil)",
@@ -118,6 +124,7 @@ main { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem 5rem; }
 .epigraph { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--rule); }
 .epigraph .en { font-style: italic; color: var(--muted); align-self: center; }
 .about { max-width: 38rem; color: var(--muted); padding: 1.5rem 0 0; }
+.credit { max-width: 38rem; color: var(--muted); margin: 0; }
 .contents { list-style: none; margin: 2.5rem 0 0; padding: 0; }
 .contents li a { display: grid; grid-template-columns: 2.5rem 1fr 1fr; gap: 1rem; align-items: baseline;
   padding: .7rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); }
@@ -131,6 +138,7 @@ main { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem 5rem; }
   border-bottom: 1px solid var(--rule); }
 .chapter-head h1 { margin: 0; font-weight: 400; font-size: 1.9rem; line-height: 1.25; font-style: italic; }
 .chapter-head .ar { font-family: var(--ar); font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.3; text-align: right; }
+.chapter-head + .prose { margin-top: 2rem; }
 .sub { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 3.5rem 0 0; }
 .sub h2 { margin: 0; font-family: var(--ar); font-weight: 400; font-size: 1.8rem; grid-column: 2; text-align: right; }
 
@@ -173,6 +181,10 @@ details.notes ul { margin: .5rem 0 0; padding-left: 1.2rem; max-width: 40rem; }
 .pager a { text-decoration: none; }
 .pager .ar { font-family: var(--ar); font-size: 1.15rem; }
 .missing { color: var(--muted); font-style: italic; }
+
+.site-foot { border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+.site-foot-inner { max-width: 72rem; margin: 0 auto; padding: 1.25rem; display: flex; flex-wrap: wrap;
+  justify-content: space-between; gap: .25rem 2rem; }
 
 /* Review page */
 .review-intro { max-width: 40rem; padding-top: 1.5rem; }
@@ -247,6 +259,12 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700'
          '&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">')
 
+FAVICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="4" fill="#2e6b62"/>'
+           '<path d="M9 26V15a7 7 0 0 1 14 0v11z" fill="#edf0ec"/></svg>')
+
+FOOTER = (f'<footer class="site-foot"><div class="site-foot-inner"><a href="{SOURCE_URL}">Arabic source text (OpenITI)</a>'
+          f'<span>{CREDIT}</span></div></footer>')
+
 e = html.escape
 
 
@@ -259,12 +277,15 @@ def strip_number(name):
     return re.sub(r"^\s*\d+\s*-\s*", "", name or "")
 
 
-def page(title, body, nav, edit_page="*"):
-    return (f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
+def page(title, body, nav, edit_page="*", footer=FOOTER, base=""):
+    return (f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">{base}'
             f'<meta name="viewport" content="width=device-width, initial-scale=1">'
-            f'<title>{e(title)}</title>{FONTS}<link rel="stylesheet" href="style.css">'
+            f'<title>{e(title)}</title><meta name="description" content="{e(DESCRIPTION)}">'
+            f'<meta property="og:type" content="website"><meta property="og:title" content="{e(title)}">'
+            f'<meta property="og:description" content="{e(DESCRIPTION)}"><meta name="theme-color" content="#edf0ec">'
+            f'<link rel="icon" href="favicon.svg" type="image/svg+xml">{FONTS}<link rel="stylesheet" href="style.css">'
             f'<script src="edit.js" defer></script></head><body data-edit-page="{e(edit_page)}">'
-            f'{nav}<main>{body}</main></body></html>')
+            f'{nav}<main>{body}</main>{footer}</body></html>')
 
 
 def nav_bar(chapters, current=None):
@@ -456,6 +477,7 @@ def main():
     SITE.mkdir(exist_ok=True)
     (SITE / "style.css").write_text(CSS, encoding="utf-8")
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
+    (SITE / "favicon.svg").write_text(FAVICON, encoding="utf-8")
 
     for i, ch in enumerate(chapters):
         head = (f'<header class="chapter-head"><h1>{e(ch["en"])}</h1>'
@@ -502,14 +524,24 @@ def main():
         f'<span data-loc="{loc}.h2.en">{e(tv.get("h2", ""))}</span></p>'
         f'<p lang="ar" dir="rtl"><span data-loc="{loc}.h1.ar">{e(v["h1"])}</span><br>'
         f'<span data-loc="{loc}.h2.ar">{e(v["h2"])}</span></p></section>'
-        '<p class="about">Arabic text from the Shamela edition by Mustafa Hijazi, with a draft machine '
+        f'<p class="about">Arabic text from the <a href="{SOURCE_URL}">Shamela edition by Mustafa Hijazi, via OpenITI</a>, '
+        'with a draft machine '
         'translation: the verse by GPT-6 Astra, the prose by GPT-6.1 Sol. Scholars are correcting both the '
         'Arabic and the English, and their changes appear here as they are made. '
         '<a href="review.html">Start with the uncertain passages</a>.</p>'
+        f'<p class="credit">{CREDIT}</p>'
         f'<ol class="contents">{"".join(items)}</ol>'
     )
-    (SITE / "index.html").write_text(page("al-Manazil wa-l-Diyar", home, nav_bar(chapters)), encoding="utf-8")
-    print(f"Wrote {len(chapters) + 2} pages to {SITE}")
+    (SITE / "index.html").write_text(page("al-Manazil wa-l-Diyar", home, nav_bar(chapters), footer=""), encoding="utf-8")
+
+    # Served for any bad path, however deep, so its links need the site root as their base.
+    missing = ('<header class="chapter-head"><h1>Page not found</h1></header>'
+               '<div class="review-intro"><p>There is nothing at this address. '
+               '<a href="index.html">Go to the list of chapters</a>.</p></div>')
+    (SITE / "404.html").write_text(
+        page("Page not found: al-Manazil wa-l-Diyar", missing, nav_bar(chapters), "404.html",
+             base='<base href="/manazil/">'), encoding="utf-8")
+    print(f"Wrote {len(chapters) + 3} pages to {SITE}")
 
 
 if __name__ == "__main__":

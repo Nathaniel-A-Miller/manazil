@@ -479,6 +479,10 @@
     if (node) { ev.preventDefault(); openEditor(node.dataset.loc, node); }
   });
 
+  const chapterMenu = document.querySelector(".bar details");
+  document.addEventListener("click", (ev) => { if (chapterMenu && !chapterMenu.contains(ev.target)) chapterMenu.open = false; });
+  document.addEventListener("keydown", (ev) => { if (chapterMenu && ev.key === "Escape") chapterMenu.open = false; });
+
   renderAccount();
   loadAll().catch((err) => console.warn("Edits not loaded:", err)).finally(() => {
     renderAccount();

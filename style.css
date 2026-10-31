@@ -45,6 +45,7 @@ main { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem 5rem; }
 .epigraph { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--rule); }
 .epigraph .en { font-style: italic; color: var(--muted); align-self: center; }
 .about { max-width: 38rem; color: var(--muted); padding: 1.5rem 0 0; }
+.credit { max-width: 38rem; color: var(--muted); margin: 0; }
 .contents { list-style: none; margin: 2.5rem 0 0; padding: 0; }
 .contents li a { display: grid; grid-template-columns: 2.5rem 1fr 1fr; gap: 1rem; align-items: baseline;
   padding: .7rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); }
@@ -58,6 +59,7 @@ main { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem 5rem; }
   border-bottom: 1px solid var(--rule); }
 .chapter-head h1 { margin: 0; font-weight: 400; font-size: 1.9rem; line-height: 1.25; font-style: italic; }
 .chapter-head .ar { font-family: var(--ar); font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.3; text-align: right; }
+.chapter-head + .prose { margin-top: 2rem; }
 .sub { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 3.5rem 0 0; }
 .sub h2 { margin: 0; font-family: var(--ar); font-weight: 400; font-size: 1.8rem; grid-column: 2; text-align: right; }
 
@@ -100,6 +102,10 @@ details.notes ul { margin: .5rem 0 0; padding-left: 1.2rem; max-width: 40rem; }
 .pager a { text-decoration: none; }
 .pager .ar { font-family: var(--ar); font-size: 1.15rem; }
 .missing { color: var(--muted); font-style: italic; }
+
+.site-foot { border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+.site-foot-inner { max-width: 72rem; margin: 0 auto; padding: 1.25rem; display: flex; flex-wrap: wrap;
+  justify-content: space-between; gap: .25rem 2rem; }
 
 /* Review page */
 .review-intro { max-width: 40rem; padding-top: 1.5rem; }
