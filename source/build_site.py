@@ -23,7 +23,7 @@ SITE = ROOT.parent
 SOURCE_URL = ("https://github.com/OpenITI/RELEASE/blob/master/data/0584IbnMunqidhShayzari/"
               "0584IbnMunqidhShayzari.ManazilWaDiyar/0584IbnMunqidhShayzari.ManazilWaDiyar.Shamela0005416-ara1.completed")
 CREDIT = "Website by Dr. Nathaniel A. Miller"
-DESCRIPTION = ("Usama ibn Munqidh's al-Manazil wa-l-Diyar (Abodes and Dwellings): "
+DESCRIPTION = ("Usama ibn Munqidh's al-Manazil wa-l-Diyar (Encampments and Dwellings): "
                "the Arabic text facing a draft English translation.")
 
 # English titles for the chapter headings.
