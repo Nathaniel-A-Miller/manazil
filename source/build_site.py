@@ -517,7 +517,7 @@ def main():
                      f'<span class="t-ar" lang="ar" dir="rtl">{e(ch["ar"])}</span></a></li>')
     home = (
         '<section class="hero"><h1 lang="ar" dir="rtl">المنازل والديار</h1>'
-        '<div class="en"><p class="title-en">Abodes and Dwellings</p>'
+        '<div class="en"><p class="title-en">Encampments and Dwellings</p>'
         '<p class="author">Usāma ibn Munqidh (d. 584/1188)</p></div></section>'
         f'<section class="epigraph" data-page="{chapters[1]["file"]}">'
         f'<p class="en"><span data-loc="{loc}.h1.en">{e(tv.get("h1", ""))}</span><br>'
